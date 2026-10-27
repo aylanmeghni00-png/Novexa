@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novexa — créateur de page web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#33351F;
+    --olive:#3E4B2E;
+    --olive-dark:#2B3620;
+    --paper:#F3F1E4;
+    --card:#c2d4c0;
+    --honey:#C98A2B;
+    --honey-dark:#9C6A1E;
+    --brick:#8B4234;
+    --line:rgba(51,53,31,0.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces', serif;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,241,228,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 32px;max-width:1120px;margin:0 auto;
+  }
+  .logo{text-decoration:none;font-family:'Fraunces', serif;font-size:22px;font-weight:600;letter-spacing:0.2px;}
+  .logo span{color:var(--honey-dark);}
+  nav.links{display:flex;gap:36px;font-size:15px;}
+  nav.links a{text-decoration:none;position:relative;}
+  nav.links a::after{
+    content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;
+    background:var(--olive);transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--olive);color:var(--card);
+    padding:10px 20px;border-radius:2px;text-decoration:none;
+    font-size:14px;font-weight:500;
+  }
+  @media(max-width:720px){nav.links{display:none;}}
+
+  /* Hero */
+  .hero{
+    padding:96px 32px 80px;max-width:1120px;margin:0 auto;
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;
+  }
+  .hero h1{
+    font-size:56px;font-weight:500;line-height:1.08;letter-spacing:-0.5px;
+    max-width:11ch;
+  }
+  .hero p.lede{
+    margin-top:24px;font-size:18px;color:var(--ink);max-width:44ch;opacity:0.85;
+  }
+  .hero .actions{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--honey);color:var(--olive-dark);
+    padding:14px 26px;border-radius:2px;text-decoration:none;
+    font-weight:600;font-size:15px;
+  }
+  .btn-ghost{
+    border:1px solid var(--ink);color:var(--ink);
+    padding:14px 26px;border-radius:2px;text-decoration:none;
+    font-weight:500;font-size:15px;
+  }
+  .hero-art{
+    position:relative;aspect-ratio:1/1;
+  }
+  .hero-art svg{width:100%;height:100%;}
+
+  /* Marquee strip */
+  .strip{
+    background:var(--olive);color:var(--paper);
+    padding:14px 0;overflow:hidden;white-space:nowrap;
+    font-family:'Fraunces', serif;font-size:15px;letter-spacing:0.3px;
+  }
+  .strip-inner{display:inline-flex;gap:48px;animation:scroll 28s linear infinite;}
+  .strip-inner span{opacity:0.9;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){.strip-inner{animation:none;}}
+
+  /* Products */
+  .section{padding:100px 32px;max-width:1120px;margin:0 auto;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head .kicker{color:var(--honey-dark);font-weight:600;font-size:14px;}
+  .section-head h2{font-size:38px;font-weight:500;margin-top:10px;letter-spacing:-0.3px;}
+  .section-head p{margin-top:14px;color:var(--ink);opacity:0.8;font-size:16px;}
+
+  .products{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .product{
+    background:var(--card);padding:32px 26px;min-height:230px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    transition:background .2s ease;
+  }
+  .product:hover{background:#fff;}
+  .product .num{font-size:13px;color:var(--honey-dark);font-weight:600;}
+  .product h3{font-size:20px;font-weight:500;margin-top:36px;}
+  .product p{font-size:14px;opacity:0.75;margin-top:8px;}
+  @media(max-width:860px){.products{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.products{grid-template-columns:1fr;}}
+
+  /* Story */
+  .story{
+    background:var(--olive);color:var(--paper);
+    padding:110px 32px;
+  }
+  .story-inner{
+    max-width:1120px;margin:0 auto;
+    display:grid;grid-template-columns:0.8fr 1.2fr;gap:60px;align-items:start;
+  }
+  .story h2{font-size:34px;font-weight:500;line-height:1.2;}
+  .story .quote{
+    font-family:'Fraunces', serif;font-size:26px;font-weight:400;
+    line-height:1.45;font-style:italic;
+  }
+  .story .quote cite{
+    display:block;margin-top:20px;font-style:normal;font-size:14px;
+    opacity:0.7;letter-spacing:0.2px;
+  }
+  @media(max-width:800px){.story-inner{grid-template-columns:1fr;}}
+
+  /* Hours / contact */
+  .info{
+    display:grid;grid-template-columns:1fr 1fr;gap:2px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .info > div{background:var(--card);padding:44px 40px;}
+  .info h3{font-size:15px;font-weight:600;color:var(--honey-dark);margin-bottom:20px;}
+  .info .row{
+    display:flex;justify-content:space-between;padding:9px 0;
+    border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .info .row:last-child{border-bottom:none;}
+  .info address{font-style:normal;font-size:16px;line-height:1.7;}
+  .info .addr-line{margin-top:6px;opacity:0.8;}
+  @media(max-width:700px){.info{grid-template-columns:1fr;}}
+
+  /* Rendez-vous */
+  .booking{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);}
+  .b-col{background:var(--card);padding:36px 32px;}
+  .b-col label{display:block;font-size:14px;font-weight:600;color:var(--honey-dark);margin:16px 0 6px;}
+  .b-col label:first-child{margin-top:0;}
+  .b-col input,.b-col textarea{width:100%;padding:11px 12px;border:1px solid var(--line);background:var(--paper);font:inherit;color:var(--ink);border-radius:2px;}
+  .b-col input:focus-visible,.b-col textarea:focus-visible,.slot:focus-visible{outline:2px solid var(--honey-dark);outline-offset:2px;}
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;margin-top:8px;font-size:14px;}
+  .slot{padding:9px 0;border:1px solid var(--ink);background:transparent;font:inherit;font-size:14px;cursor:pointer;border-radius:2px;color:var(--ink);}
+  .slot:hover{background:#fff;}
+  .slot.on{background:var(--olive);color:var(--paper);border-color:var(--olive);}
+  .slot:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed;}
+  .b-submit{margin-top:20px;border:0;cursor:pointer;font-family:inherit;}
+  .b-msg{margin-top:14px;font-size:14px;}
+  .b-msg.ok{color:var(--olive);font-weight:600;}
+  .b-msg.err{color:var(--brick);font-weight:600;}
+  @media(max-width:800px){.booking{grid-template-columns:1fr;}}
+
+  footer{
+    padding:50px 32px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    max-width:1120px;margin:0 auto;font-size:14px;opacity:0.75;
+    flex-wrap:wrap;gap:16px;
+  }
+</style>
+</head>
+<body id="accueil">
+
+<header>
+  <div class="nav">
+    <a class="logo" href="#accueil" aria-label="Novexa, retour en haut de la page">Novexa<span></span></a>
+    <nav class="links">
+      <a href="#produits">Produits et tarifs </a>
+      <a href="#histoire">Notre histoire</a>
+      <a href="#rdv">Rendez-vous</a>
+      <a href="#infos">Horaires</a>
+    </nav>
+    <a class="nav-cta" href="#infos">Nous trouver</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Le web au service de votre business</h1>
+    <p class="lede">Une micro entreprise influente créant des pages modernes pensées pour mettre votre activité en valeur et auguementer sa visibiliter.</p>
+    <div class="actions">
+      <a class="btn-primary" href="#produits">Voir les produits</a>
+      <a class="btn-ghost" href="#infos">Adresse &amp; horaires</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="180" fill="#C98A2B" opacity="0.18"/>
+      <path d="M200 40 C300 40 360 120 360 200 C360 290 280 360 190 360 C100 360 50 290 60 200 C68 130 110 40 200 40 Z" fill="#3E4B2E" opacity="0.9"/>
+      <circle cx="150" cy="170" r="26" fill="#C98A2B"/>
+      <circle cx="235" cy="150" r="14" fill="#F3F1E4"/>
+      <circle cx="230" cy="245" r="20" fill="#8B4234"/>
+      <path d="M120 250 Q200 300 280 240" stroke="#F3F1E4" stroke-width="3" fill="none" opacity="0.6"/>
+    </svg>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span></span><span>site web professionnel</span><span>site vitrine</span><span>moderne</span><span>fiabilité</span><span>boutique en ligne</span><span>visibiliter</span><span>délais rapide</span><span>desig web</span><span>référencement</span>
+  </div>
+</div>
+
+<section class="section" id="produits">
+  <div class="section-head">
+    <div class="kicker">Notre catalogue</div>
+    <h2>Nos prestations:</h2>
+    <p>Le but initial de ces prestations sont de vous aporter de la qualité, de la simpliciter, ainsi que favoriser la croissance et la visibilité de votre entreprise :)</p>
+  </div>
+  <div class="products">
+    <div class="product">
+      <div class="num">01</div>
+      <div>
+        <h3>
+          
+          
+  Site vitrine simpliste - (790€)</h3>
+        <p>L’essentiel pour être visible sur Internet.
+Présentez votre activité, vos services, vos horaires et vos coordonnées avec un site moderne, simple et adapté aux téléphones.
+
+Idéal pour : restaurants, artisans, coiffeurs, commerces.</p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="num">02</div>
+      <div>
+        <h3>site vitrine professionnel -  (1100€)</h3>
+        <p>Un site plus complet pour développer votre activité.
+Profitez de plusieurs pages pour présenter votre entreprise en détail, mettre en avant vos services, vos réalisations, vos avis clients et faciliter la prise de contact.</p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="num">03</div>
+      <div>
+        <h3>Options suplémentaires</h3>
+        <p> - </p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="num">04</div>
+      <div>
+        <h3>maintenance mensuel - (30€)  </h3>
+        <p>
+
+Gardez votre site à jour et fonctionnel.
+ Modification de textes et photos Mise à jour des informations Petites corrections Vérification du site</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="histoire">
+  <div class="story-inner">
+    <h2>Notre histoire</h2>
+    <div class="quote">
+      « Mon histoire
+
+Je suis un jeune passionné par l’informatique et la création de sites web.
+
+J’ai décidé d’utiliser ma passion et mes compétences pour aider les commerces et entreprises de ma ville (Velaux) à se développer sur Internet.
+
+Mon objectif est simple : proposer des sites de qualité, modernes et accessibles à des prix raisonnables.
+
+Je veux avancer avec les entreprises locales et participer, à mon échelle, à faire évoluer ma ville. »
+      <cite>— Le fondateur, 2027</cite>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rdv">
+  <div class="section-head">
+    <div class="kicker">Rendez-vous</div>
+    <h2>Demander un appel</h2>
+    <p>Choisissez un créneau : je vous rappelle pour parler de votre projet. Votre rendez-vous est confirmé par e-mail après validation.</p>
+  </div>
+  <div class="booking">
+    <div class="b-col">
+      <label for="b-date">Date</label>
+      <input type="date" id="b-date">
+      <label>Créneaux disponibles (30 min)</label>
+      <div class="slots" id="b-slots">Choisissez d’abord une date.</div>
+    </div>
+    <form class="b-col" id="b-form" novalidate>
+      <label for="b-name">Nom et prénom</label>
+      <input id="b-name" autocomplete="name" required>
+      <label for="b-email">E-mail</label>
+      <input id="b-email" type="email" autocomplete="email" required>
+      <label for="b-phone">Téléphone</label>
+      <input id="b-phone" type="tel" autocomplete="tel" required>
+      <label for="b-msg">Votre projet (facultatif)</label>
+      <textarea id="b-msg" rows="3"></textarea>
+      <input id="b-site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px">
+      <button class="btn-primary b-submit" type="submit">Envoyer ma demande</button>
+      <p class="b-msg" id="b-status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="infos">
+  <div class="section-head">
+    <div class="kicker">Pratique</div>
+    <h2>Nous trouver</h2>
+  </div>
+  <div class="info">
+    <div>
+      <h3>Horaires</h3>
+      <div class="row"><span>Lundi</span><span>8h – 16h30</span></div>
+      <div class="row"><span>Mardi — Vendredi</span><span>9h30 – 19h30</span></div>
+      <div class="row"><span>Samedi</span><span>9h – 19h</span></div>
+      <div class="row"><span>Dimanche</span><span>9h – 13h</span></div>
+    </div>
+    <div>
+      <h3>Informations</h3>
+      <address>
+        <div class="addr-line">13340 Velaux</div>
+        <div class="addr-line"0769966294</div>
+        <div class="addr-line">Novexa@gmail.com</div>
+      </address>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Novexa — création de site web, Velaux</div>
+  <div>© 2026</div>
+</footer>
+
+<script>
+/* Laisser vide = mode démonstration (aucun e-mail envoyé).
+   Coller ici l’URL du script Google (voir le guide) pour activer les vraies réservations. */
+const BOOKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbzsF-efxq0ve8vQOloHBblzeOa_a-ngD9CQmk2wmtQFasrbaAQakC58lTp-4bIl0kod/exec";
+
+const $ = id => document.getElementById(id);
+const HOURS = {0:[9,13],1:[8,16.5],2:[9.5,19.5],3:[9.5,19.5],4:[9.5,19.5],5:[9.5,19.5],6:[9,19]};
+const fmt = m => Math.floor(m/60) + "h" + (m%60 ? String(m%60).padStart(2,"0") : "");
+const key = m => String(Math.floor(m/60)).padStart(2,"0") + ":" + String(m%60).padStart(2,"0");
+const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const demoTaken = {};
+let chosen = null;
+
+const dateInput = $("b-date");
+const now0 = new Date(); const max = new Date(); max.setDate(max.getDate()+60);
+dateInput.min = iso(now0); dateInput.max = iso(max);
+
+function slotsFor(d){
+  const [y,mo,da] = d.split("-").map(Number);
+  const [o,c] = HOURS[new Date(y,mo-1,da).getDay()];
+  const list = [];
+  for(let m=o*60; m+30<=c*60; m+=30) list.push(m);
+  return list;
+}
+
+async function loadTaken(d, list){
+  if(BOOKING_ENDPOINT){
+    try{ const r = await fetch(BOOKING_ENDPOINT+"?date="+d); return (await r.json()).taken || []; }
+    catch(e){ return null; }
+  }
+  let s = 0; for(const ch of d) s += ch.charCodeAt(0);
+  return list.filter((m,i)=>(s+i)%5===0).map(key).concat(demoTaken[d]||[]);
+}
+
+async function render(){
+  chosen = null;
+  const d = dateInput.value, box = $("b-slots");
+  if(!d){ box.textContent = "Choisissez d’abord une date."; return; }
+  const list = slotsFor(d);
+  const taken = await loadTaken(d, list);
+  if(taken === null){ box.textContent = "Impossible de charger les créneaux, réessayez."; return; }
+  const now = new Date(), nowM = now.getHours()*60 + now.getMinutes(), isToday = d === iso(now);
+  box.innerHTML = "";
+  list.forEach(m=>{
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "slot"; b.textContent = fmt(m);
+    b.disabled = taken.includes(key(m)) || (isToday && m <= nowM);
+    b.onclick = ()=>{ chosen = m; box.querySelectorAll(".slot").forEach(x=>x.classList.remove("on")); b.classList.add("on"); };
+    box.appendChild(b);
+  });
+}
+dateInput.addEventListener("change", render);
+
+$("b-form").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const st = $("b-status"), btn = e.target.querySelector("button[type=submit]");
+  const fail = t => { st.className = "b-msg err"; st.textContent = t; };
+  const d = dateInput.value;
+  const p = { date:d, time: chosen===null ? "" : key(chosen), name:$("b-name").value.trim(), email:$("b-email").value.trim(), phone:$("b-phone").value.trim(), message:$("b-msg").value.trim(), website:$("b-site").value };
+  if(!d || chosen===null) return fail("Choisissez une date et un créneau.");
+  if(!p.name || !p.phone) return fail("Indiquez votre nom et votre téléphone.");
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(p.email)) return fail("Indiquez une adresse e-mail valide.");
+  btn.disabled = true; st.className = "b-msg"; st.textContent = "Réservation en cours…";
+  const label = d.split("-").reverse().join("/") + " à " + fmt(chosen);
+  try{
+    if(BOOKING_ENDPOINT){
+      const r = await fetch(BOOKING_ENDPOINT, {method:"POST", body:JSON.stringify(p)});
+      const j = await r.json();
+      if(!j.ok) throw new Error(j.error || "Erreur");
+      st.textContent = "Demande envoyée pour le " + label + ". Vous recevrez un e-mail de confirmation dès que Novexa aura validé le rendez-vous (pensez à regarder vos spams).";
+    }else{
+      (demoTaken[d] = demoTaken[d] || []).push(p.time);
+      st.textContent = "Demande enregistrée pour le " + label + " (mode démonstration : aucun e-mail n’est envoyé).";
+    }
+    st.className = "b-msg ok"; e.target.reset(); dateInput.value = d; await render();
+  }catch(err){
+    fail(err.message && err.message !== "Failed to fetch" ? err.message : "La réservation a échoué, réessayez.");
+    await render();
+  }
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>
